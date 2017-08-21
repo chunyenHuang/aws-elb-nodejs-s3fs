@@ -1,6 +1,7 @@
 # debian-nodejs-s3fs
 
-The startup kits for AWS Elasticbeanstalk (ELB) deployment. You may find an example here [ExpressJS/NodeJS with s3fs]()
+The startup kits for AWS Elasticbeanstalk (ELB) deployment.   
+You may find an example here [ExpressJS/NodeJS with s3fs](./example)
 
 
 ## GetStarted
