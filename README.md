@@ -4,8 +4,8 @@ The startup kits for AWS Elasticbeanstalk (ELB) deployment with NodeJS and s3fs.
 
 ## Examples
 
-- [Basic Usage](./examples/basic)
-- [ELB Deployment](./examples/elb-nginx-cadvisor)
+- [Basic Usage](https://github.com/chunyenHuang/aws-elb-nodejs-s3fs/tree/master/examples/basic)
+- [ELB Deployment](https://github.com/chunyenHuang/aws-elb-nodejs-s3fs/tree/master/examples/elb-nginx-cadvisor)
 
 ## GetStarted
 
