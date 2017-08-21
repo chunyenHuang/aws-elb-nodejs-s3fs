@@ -1,6 +1,6 @@
-# debian-nodejs-s3fs
+# aws-elb-nodejs-s3fs
 
-The startup kits for AWS Elasticbeanstalk (ELB) deployment.
+The startup kits for AWS Elasticbeanstalk (ELB) deployment with NodeJS and s3fs.
 
 ## Examples
 
