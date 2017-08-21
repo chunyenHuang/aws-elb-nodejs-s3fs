@@ -1,0 +1,14 @@
+version: '3'
+services:
+  node-s3fs:
+    image: little78926/debian-nodejs-s3fs
+    privileged: true
+    cap_add: 
+      - SYS_ADMIN
+    device:
+      - /dev/fuse
+    environment:
+      - AWSACCESSKEYID: [YOUR_ID]
+      - AWSSECRETACCESSKEY: [YOUR_KEY]
+      - BUCKETNAME: [YOUR_BUCKET]
+      - MOUNTDIR: [YOUR_MOUNTDIR]
