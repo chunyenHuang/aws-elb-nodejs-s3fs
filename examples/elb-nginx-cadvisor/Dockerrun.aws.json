@@ -1,0 +1,105 @@
+{
+    "AWSEBDockerrunVersion": 2,
+    "containerDefinitions": [{
+        "name": "YOUR_ELB_APP_NAME",
+        "image": "YOUR_IMAGE_PATH",
+        "essential": true,
+        "privileged": true,
+        "memoryReservation": 256,
+        "environment": [{
+            "name": "BUCKETNAME",
+            "value": ""
+        }, {
+            "name": "MOUNTDIR",
+            "value": ""
+        }, {
+            "name": "AWSACCESSKEYID",
+            "value": ""
+        }, {
+            "name": "AWSSECRETACCESSKEY",
+            "value": ""
+        }],
+        "portMappings": [{
+            "hostPort": 8080,
+            "containerPort": 8080
+        }]
+    }, {
+        "name": "nginx",
+        "image": "nginx:latest",
+        "essential": true,        
+        "memoryReservation": 64,
+        "portMappings": [{
+            "hostPort": 80,
+            "containerPort": 80
+        }],
+        "links": [
+            "YOUR_ELB_APP_NAME",
+            "cadvisor"
+        ],
+        "mountPoints": [{
+            "sourceVolume": "nginx-proxy-conf",
+            "containerPath": "/etc/nginx/conf.d",
+            "readOnly": true
+        }]
+    }, {
+        "name": "cadvisor",
+        "image": "google/cadvisor:latest",
+        "privileged": true,
+        "memoryReservation": 32,
+        "portMappings": [{
+            "hostPort": 8888,
+            "containerPort": 8080
+        }],
+        "mountPoints": [{
+            "sourceVolume": "cgroup",
+            "containerPath": "/cgroup",
+            "readOnly": true            
+        },{
+            "sourceVolume": "rootfs",
+            "containerPath": "/rootfs",
+            "readOnly": true                        
+        },{
+            "sourceVolume": "var-run",
+            "containerPath": "/var/run"
+        },{
+            "sourceVolume": "sys",
+            "containerPath": "/sys",
+            "readOnly": true
+        },{
+            "sourceVolume": "cgroup",
+            "containerPath": "/var/lib/docker",
+            "readOnly": true
+        }]
+    }],
+    "volumes": [{
+        "name": "nginx-proxy-conf",
+        "host": {
+            "sourcePath": "/var/proxy/conf.d"
+        }
+    }, {
+        "name": "cgroup",
+        "host": {
+            "sourcePath": "/cgroup"
+        }
+    }, {
+        "name": "rootfs",
+        "host": {
+            "sourcePath": "/"
+        }
+    }, {
+        "name": "var-run",
+        "host": {
+            "sourcePath": "/var/run"
+        }
+    }, {
+        "name": "sys",
+        "host": {
+            "sourcePath": "/sys"
+        }
+    }, {
+        "name": "var-lib-docker",
+        "host": {
+            "sourcePath": "/var/lib/docker"
+        }
+    }]
+}

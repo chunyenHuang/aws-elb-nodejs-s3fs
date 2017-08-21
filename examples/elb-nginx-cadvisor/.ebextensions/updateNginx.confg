@@ -1,0 +1,25 @@
+commands:
+  0_mkdir:
+    command: "mkdir -p /var/proxy/conf.d"
+  1_mk-file:
+    command: "touch /var/proxy/conf.d/nginx.conf"
+  2_remove-old-file:
+    command: "echo 'yes' | rm /var/proxy/conf.d/nginx.conf"
+  3_create-config:
+    command: {  "Fn::Join" : [ "", [ 'echo "', "
+        client_max_body_size 300m;
+        server {
+            listen 80;
+            server_name YOUR_HOSTNAME_WITHOUT_HTTP;
+            location / {
+                proxy_pass http://YOUR_ELB_APP_NAME:8080;
+            }
+        }
+        server {
+            listen 80;
+            server_name YOUR_HOSTNAME_WITHOUT_HTTP;
+            location / {
+                proxy_pass http://cadvisor:8080;
+            }
+        }
+    ", '" > /var/proxy/conf.d/nginx.conf; ' ] ] }
